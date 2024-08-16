@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="status-bar"></div>
+      <h1>Sign Up Chatgram</h1>
+    </div>
+    <div class="form-container">
+      <form id="signupForm">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Your Name">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email Address">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" minlength="9" required>
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+        <p id="password-match"></p>
+        <button type="submit">Submit</button>
+        <a href="login.html">Already have an account?</a>
+        <a href="forgetpws.html">Forget Password</a>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('signupForm');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const usernameInput = document.getElementById('username');
+      const emailInput = document.getElementById('email');
+      const username = usernameInput.value;
+      const email = emailInput.value;
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirmPassword');
+      const password = passwordInput.value;
+      const confirmPassword = confirmPasswordInput.value;
+
+      // Validate password strength and password match
+      const passwordStrength = getPasswordStrength(password);
+      if (passwordStrength === 'Password strength: Weak') {
+        alert('Please choose a stronger password.');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      // Check if the email already exists in local storage
+      const existingEmail = localStorage.getItem(email);
+      if (existingEmail) {
+        alert('This email address is already registered.');
+      } else {
+        // Store the username, password, and email in local storage
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+        localStorage.setItem('email', email);
+
+        // Redirect to index.html
+        window.location.href = 'index.html';
+      }
+    });
+
+    function getPasswordStrength(password) {
+      const hasUppercase = /[A-Z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasMinLength = password.length >= 9;
+
+      if (!hasUppercase || !hasNumber || !hasMinLength) {
+        return 'Password strength: Weak';
+      } else {
+        return 'Password strength: Strong';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface</title>
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="sidebar">
+      <div class="contact active">
+        <img src="profile_pic1.jpg" alt="Contact 1 Profile Picture">
+        <div class="contact-info">
+          <div class="name">Contact 1</div>
+          <div class="status">Online</div>
+        </div>
+      </div>
+      <div class="contact">
+        <img src="profile_pic2.jpg" alt="Contact 2 Profile Picture">
+        <div class="contact-info">
+          <div class="name">Contact 2</div>
+          <div class="status">Last seen 2 hours ago</div>
+        </div>
+      </div>
+      <!-- Add more contacts here -->
+    </div>
+    <div class="chat-content">
+      <div class="chat-header">
+        <div class="contact-info">
+          <img src="profile_pic1.jpg" alt="Contact 1 Profile Picture">
+          <div class="name">Contact 1</div>
+        </div>
+      </div>
+      <div class="messages">
+        <!-- Chat messages will be displayed here -->
+        <div class="message received">
+          <div class="text">Hey, how are you?</div>
+        </div>
+        <div class="message sent">
+          <div class="text">Hi, I'm doing good, thanks!</div>
+        </div>
+        <!-- Add more messages here -->
+      </div>
+      <div class="chat-input">
+        <textarea placeholder="Type a message..."></textarea>
+        <button>Send</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

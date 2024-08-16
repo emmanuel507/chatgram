@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+  }
+  
+  .chat-container {
+    display: flex;
+    height: 100vh;
+  }
+  .contact-info{
+    color: white;
+  }
+  .sidebar {
+    flex: 0 0 25%;
+    background-color:rgb(8, 8, 8);
+    padding: 20px;
+  }
+  
+  .chat {
+    flex: 1;
+    padding: 20px;
+    overflow-y: scroll;
+  }
+  
+  .message {
+    background-color: #DCF8C6;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 70%;
+  }
+  
+  .message.received {
+    background-color: #ffffff;
+  }
+  
+  .message.received .sender {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .message.sent {
+    align-self: flex-end;
+  }
+  
+  .input-container {
+    display: flex;
+    margin-top: 20px;
+  }
+  
+  .input-container input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+  
+  .input-container button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #128C7E;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .input-container button:hover {
+    background-color: #0d6e5c;
+  }
+  

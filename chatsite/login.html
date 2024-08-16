@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="status-bar"></div>
+      <h1>Log In Chatgram</h1>
+    </div>
+    <div class="form-container">
+      <form id="loginForm">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email Address">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" minlength="9" required>
+        <p id="password-strength"></p>
+        <button type="submit">Login</button>
+        <div class="link-container">
+          <a href="signup.html">Create New Account</a>
+          <a href="forgetpws.html">Forget Password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('password');
+    const passwordStrengthDisplay = document.getElementById('password-strength');
+
+    passwordInput.addEventListener('input', checkPasswordStrength);
+
+    function checkPasswordStrength() {
+      const password = passwordInput.value;
+      const strength = getPasswordStrength(password);
+
+      passwordStrengthDisplay.textContent = strength;
+    }
+
+    function getPasswordStrength(password) {
+      const hasUppercase = /[A-Z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasMinLength = password.length >= 9;
+
+      if (!hasUppercase || !hasNumber || !hasMinLength) {
+        return 'Password strength: Weak';
+      } else {
+        return 'Password strength: Strong';
+      }
+    }
+
+    loginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      // Retrieve the stored user data associated with the entered email
+      const storedUserData = localStorage.getItem(email);
+      if (storedUserData) {
+        const userData = JSON.parse(storedUserData);
+        const storedPassword = userData.password;
+
+        // Validate the entered password
+        if (password === storedPassword) {
+          // Credentials are valid, redirect to index.html
+          localStorage.setItem('isLoggedIn', true);
+          window.location.href = 'index.html';
+        } else {
+          // Password is incorrect, display an error message
+          alert('Incorrect password');
+        }
+      } else {
+        // Email is not registered, display an error message
+        alert('Email address is not registered');
+      }
+    });
+  </script>
+</body>
+</html>
